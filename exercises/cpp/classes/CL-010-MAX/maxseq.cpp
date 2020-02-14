@@ -1,6 +1,7 @@
 #ifndef MODULE
 #define MODULE
 #include "maxseq.hpp"
+#include <cerrno>
 void MaxSeq::add(int n)
     {
         if (count_n == 0)
