@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdio>
 #include "maxseq.hpp"
+#include <cerrno>
 
 using std::cout;
 using std::endl;
