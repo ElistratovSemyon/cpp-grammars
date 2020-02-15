@@ -11,17 +11,16 @@ bool test_constr_transform_const_length();
 bool test_constr_copy_const_length();
 bool test_constr_transform_dynamic_length();
 bool test_operator_index();
-void test_operator_index_out_of_bounds();
+bool test_operator_index_out_of_bounds();
 
 int main(){
-    cout << std::boolalpha << "1 test (default constructor): " <<  test_constr_def_const_length() << endl;
+    cout << std::boolalpha << "1 test (default constructor): " <<  test_constr_def_const_length();
+    cout << endl;
     cout << "2 test (transform constructor): " << test_constr_transform_const_length() << endl;
     cout << "3 test (copy constructor): " << test_constr_copy_const_length() << endl;
     cout << "4 test (dynamic length): " << test_constr_transform_dynamic_length() << endl;
     cout << "5 test (index): " << test_operator_index() << endl;
-    cout << "6 test (index out of bounds): ";
-    test_operator_index_out_of_bounds(); 
-    cout << endl;
+    cout << "6 test (index out of bounds): " << test_operator_index_out_of_bounds() << endl; 
     cout << "testing completed" << endl;
     return 0;
 }
@@ -114,7 +113,8 @@ bool test_operator_index(){
     }
     return (count_error == 0);
 }
-void test_operator_index_out_of_bounds(){
+bool test_operator_index_out_of_bounds(){
     IntVector vect(3);
-    vect[3] = 1; 
+    vect[3] = 1;
+    return (vect[3] == 1) && (vect[10] == 0); 
 }
