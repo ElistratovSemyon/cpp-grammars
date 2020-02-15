@@ -1,7 +1,7 @@
 #ifndef MODULE
 #define MODULE
 #include "maxseq.hpp"
-#include <cerrno>
+//#include <cerrno>
 void MaxSeq::add(int n)
     {
         if (count_n == 0)
@@ -21,7 +21,7 @@ void MaxSeq::add(int n)
     {
         if (count_n == 0)
         {
-            perror("No values");
+            //perror("No values");
             return 0;
         }
         return max_n;
