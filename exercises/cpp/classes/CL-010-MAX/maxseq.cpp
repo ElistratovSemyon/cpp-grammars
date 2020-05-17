@@ -1,33 +1,42 @@
 #ifndef MODULE
 #define MODULE
+#include <iostream>
 #include "maxseq.hpp"
-//#include <cerrno>
+
+
+MaxSeq::MaxSeq()
+{ 
+    max_n = 0;
+    count_n = 0;
+}
+
 void MaxSeq::add(int n)
+{
+    if (count_n == 0)
     {
-        if (count_n == 0)
+        max_n = n;
+        
+    }
+    else
+    {
+        if (max_n < n)
         {
             max_n = n;
         }
-        else
-        {
-            if (max_n < n)
-            {
-                max_n = n;
-            }
-        }
-        count_n++;
     }
-    int MaxSeq::max()
+    count_n++;
+}
+
+int MaxSeq::max()
+{
+    if (count_n == 0)
     {
-        if (count_n == 0)
-        {
-            //perror("No values");
-            return 0;
-        }
-        return max_n;
+        throw std::logic_error("No elements in sequence");
     }
-    size_t MaxSeq::count()
-    {
-        return count_n;
-    }
+    return max_n;
+}
+size_t MaxSeq::count()
+{
+    return count_n;
+}
 #endif
