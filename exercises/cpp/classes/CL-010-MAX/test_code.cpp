@@ -1,61 +1,105 @@
 #include <iostream>
-#include <cstdio>
 #include "maxseq.hpp"
-#include <cerrno>
+#include <string>
 
 using std::cout;
 using std::endl;
-using std::boolalpha;
 
-bool test_first_value_max();
-bool test_last_value_max();
-bool test_random_values();
-/*
-bool test_no_values();
-*/
+void Empty_test();
+void Constructor_test();
+void Add_test();
+void Count_test();
+void Max_test();
+
+
 int main(){
-    cout << std::boolalpha << "1 test (first value max): " <<  test_first_value_max() << endl;
-    cout << "2 test (last value max): " << test_last_value_max() << endl;
-    cout << "3 test (many rand values): " << test_random_values() << endl;
-//  cout << "4 test (no values): " << test_no_values() << endl;
-    cout << "testing completed" << endl;
+    cout << "Start tests." << endl;
+    cout << "------------" << endl;
+    try
+    {
+        Constructor_test();
+        cout << "Constructor test completed succesfully." << endl;
+        Add_test();
+        cout << "'Add' test completed succesfully." << endl;
+        Max_test();
+        cout << "'Max test' completed succesfully." << endl;
+        Count_test();
+        cout << "'Count' test completed succesfully." << endl;
+        Empty_test();
+        cout << "'Empty sequence' test completed succesfully." << endl;
+        cout << "------------" << endl;
+    }
+    catch(const std::exception & e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    catch(...)
+    {
+        cout << "Unexpected error.\n";
+    }
+    
     return 0;
 }
 
-bool test_first_value_max(){
+void Constructor_test()
+{
     MaxSeq max;
-    max.add(50);
-    max.add(10);
-    max.add(29);
+}                                                                                               
 
-    return (max.count() == 3) && (max.max() == 50);
-}
+void Add_test()
+{                                                                         
+    MaxSeq max;                                                                                     
+    for (int i = 0; i < 10; i++)                                                                    
+    {                                                                                               
+        max.add(i);                                                                                 
+    }                                                                                               
+} 
 
-bool test_last_value_max(){
-    MaxSeq max;
-    for (int i = 0; i < 10; i++)
+                                                                                                
+                                                                                                    
+void Max_test()
+{                                                                          
+    MaxSeq max;                                                                                     
+    max.add(1000);                                                                                  
+    max.add(10);                                                                                    
+    max.add(-15);                                                                                   
+    max.add(-10000);                                                                                
+    max.add(1001);                                                                                  
+    max.add(10);                                                                                    
+    if (max.max() != 1001)
     {
-        max.add(i);
+        throw std::logic_error("Incorrectly computing max");
+    }                                                                                                                                           
+}       
+
+void Count_test()
+{                                                                          
+    MaxSeq max;                                                                                     
+    max.add(10);                                                                                  
+    max.add(20);                                                                                    
+    max.add(3);                                                                                   
+    max.add(4);                                                                                
+                                                                                      
+    if (max.count() != 4)
+    {
+        throw std::logic_error("Incorrectly computing count");
+    }                                                                                                                                           
+} 
+
+void Empty_test()
+{
+    MaxSeq max;
+    try
+    {
+        max.max();
     }
-    return (max.count() == 10) && (max.max() == 9);
-}
+    catch(const std::logic_error & e)
+    {
+        std::string err = "No elements in sequence";
+        if (e.what() != err)
+        {
+            throw std::logic_error("Incorrectly behaviour when computing count from empty array");
+        }
+    }
 
-bool test_random_values(){
-    MaxSeq max;
-    max.add(1000);
-    max.add(10);
-    max.add(-15);
-    max.add(-10000);
-    max.add(1001);
-    max.add(10);
-
-    return (max.count() == 6) && (max.max() == 1001);
 }
-
-/*
-bool test_no_values(){
-    MaxSeq max;
-    max.max();
-    return (errno == 0);
-}
-*/
