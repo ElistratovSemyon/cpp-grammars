@@ -1,8 +1,8 @@
 all: test_code.gcno
-	gcov ./test_code.gcno 
-
+	gcov -n ./textfilereader.gcno
+	
 test_code.gcno: test.out
-	valgrind ./test.out
+	./test.out
 
 test.out: test_code.o textfilereader.o	
 	c++ -o test.out -g -O0 -fprofile-arcs -ftest-coverage test_code.o textfilereader.o
