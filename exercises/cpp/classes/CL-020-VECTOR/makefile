@@ -1,8 +1,8 @@
 all: test_code.gcno
-	gcov ./test_code.gcno 
-
+	gcov -n -f -a ./intvector.gcno
+	
 test_code.gcno: test.out
-	valgrind ./test.out
+	./test.out
 
 test.out: test_code.o intvector.o	
 	c++ -o test.out -g -O0 -fprofile-arcs -ftest-coverage test_code.o intvector.o
@@ -15,4 +15,3 @@ test_code.o: test_code.cpp clean
 
 clean: 
 	rm *.gcno *.gcov *.gcda *.out *.dSYM *.o || true
-
