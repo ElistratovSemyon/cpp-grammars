@@ -8,29 +8,17 @@ class IntVector
     int * head;
 
 public:
-    IntVector(int length = 10){
-        size = length;
-        head = new int[size];
-        for (int i = 0; i < size; i++){
-            head[i] = 0;
-        }
-    }
+    IntVector(int length = 10);
 
-    IntVector(const IntVector & x){
-        size = x.size;
-        head = new int[size];
-        for (int i = 0; i < size; i++){
-            head[i] = x.head[i];
-        }
-    }
+    IntVector(const IntVector & x);
+
     int & operator [](int i);    
+    
     void set(int i, int value);
         
     int get(int i) const;
 
-    ~IntVector(){
-        delete [] head;
-    }
+    ~IntVector();
 };
 
 #endif
