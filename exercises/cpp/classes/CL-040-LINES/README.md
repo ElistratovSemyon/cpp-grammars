@@ -1,18 +1,5 @@
-all: test_code.gcno
-	gcov -n ./textfilereader.gcno
-	
-test_code.gcno: test.out
-	./test.out
-
-test.out: test_code.o textfilereader.o	
-	c++ -o test.out -g -O0 -fprofile-arcs -ftest-coverage test_code.o textfilereader.o
-
-textfilereader.o: textfilereader.cpp
-	c++ -c -g -O0 -fprofile-arcs -ftest-coverage textfilereader.cpp
-
-test_code.o: test_code.cpp clean
-	c++ -c -g -O0 -fprofile-arcs -ftest-coverage test_code.cpp
-
-clean: 
-	rm *.gcno *.gcov *.gcda *.out *.dSYM *.o || true
-
+Библиотека IntVector представляет собой класс находящий максимальный элемент последовательности.       
+                                                                                                    
+Для тестирование класса введите команду make, она автоматически запустит тестирование.              
+Все тесты должны быть успешно завершены. Покрытие кода должно быть не меньше 90% (не 100%           
+вследствие тестирования на вывод ошибки в методе get()).
