@@ -1,6 +1,26 @@
 #ifndef MOD
 #define MOD
 #include "intvector.hpp"
+#include <iostream>
+
+IntVector::IntVector(int length)
+{
+    size = length;
+    head = new int[size];
+    for (int i = 0; i < size; i++){
+        head[i] = 0;
+    }
+}
+
+IntVector::IntVector(const IntVector & x)
+{
+    size = x.size;
+    head = new int[size];
+    for (int i = 0; i < size; i++){
+        head[i] = x.head[i];
+    }
+}
+
 void IntVector::set(int i, int value){
     if (i > size)
     {   
@@ -23,6 +43,15 @@ void IntVector::set(int i, int value){
 
 int IntVector::get(int i) const
 {
+    if (i > size)
+    {
+        throw std::out_of_range("Try to get non-existent element");
+    }
     return head[i];
+}
+
+IntVector::~IntVector()
+{
+    delete [] head;
 }
 #endif
