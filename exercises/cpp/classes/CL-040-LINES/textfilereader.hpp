@@ -13,22 +13,10 @@ class TextFileReader
     bool flag;
 
 public:
-    TextFileReader(const char* path)
-    {
-        f.open(path);
-        if (getline(f, str))
-        {
-            flag = true;
-        }
-        else
-        {
-            flag = false;
-        }
-    }
-    ~TextFileReader()
-    {
-        f.close();
-    }
+    TextFileReader(const char* path);
+    
+    ~TextFileReader();
+    
     std::string get();   
     bool hasNext() const;
     
